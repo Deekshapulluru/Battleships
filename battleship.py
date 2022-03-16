@@ -4,6 +4,7 @@ Name:
 Roll No:
 """
 
+from pickle import LIST
 import battleship_tests as test
 
 project = "Battleship" # don't edit this
@@ -62,17 +63,44 @@ Parameters: int ; int
 Returns: 2D list of ints
 '''
 def emptyGrid(rows, cols):
-    return
-
+   # g = [[1]*(cols)]*(rows)
+    #return g 
+    #a=10 
+    #b=20 
+    list=[[1]*(cols) for row in range(rows)]
+    return (list)
+    #done 
+    
 
 '''
 createShip()
 Parameters: no parameters
 Returns: 2D list of ints
 '''
-def createShip():
-    return
-
+#def createShip():
+    #lst=[rows][cols]
+    #row=3
+    #col=7
+    #randomnumber= 1
+#for i in range(row)
+#    lst[3][6]="4"
+#    lst[3][7]="5"
+#    lst[3][8]="6"
+#    return
+def createShip(): 
+    len_ship = 3 
+    orientation = random.randint(0,1) 
+    if orientation == 0: 
+        row_ship = [random.randint(1,8 - 1)]*len_ship 
+        centre = random.randint(1,8 - len_ship)  
+        lst=[centre-1,centre,centre+1]
+        combined= tuple(zip(row_ship, lst)) 
+    else: 
+        col_ship = [random.randint(1,8 - 1)]*len_ship 
+        centre = random.randint(1,8 - len_ship)  
+        lst=[centre-1,centre,centre+1]
+        combined = tuple(zip(lst, col_ship))
+    return list(combined)
 
 '''
 checkShip(grid, ship)
@@ -80,16 +108,34 @@ Parameters: 2D list of ints ; 2D list of ints
 Returns: bool
 '''
 def checkShip(grid, ship):
-    return
-
-
+    count = 0 
+    i=0 
+    while i<len(ship): 
+        l = ship[i] 
+        l1=l[0] 
+        l2=l[1] 
+        if(grid[l1][l2]!=EMPTY_UNCLICKED): 
+            count = 1 
+        i = i+1 
+    if(count==0): 
+        return True
+    return  False
 '''
 addShips(grid, numShips)
 Parameters: 2D list of ints ; int
 Returns: 2D list of ints
 '''
 def addShips(grid, numShips):
-    return
+#   count=0 
+#    while count<numShips: 
+#        ship = createShip() 
+#        if checkShip(grid,ship) == True: 
+#            for coordinates in ship: 
+#                l1 = coordinates[0] 
+#                l2 = coordinates[1] 
+#                grid[l1][l2] = SHIP_UNCLICKED 
+#            count = count + 1 
+#    return grid
 
 
 '''
@@ -268,6 +314,10 @@ def runSimulation(w, h):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
+    test.testEmptyGrid()
+    test.testCreateShip()
+    test.testCheckShip()
+    test.testAddShips()
 
     ## Finally, run the simulation to test it manually ##
     # runSimulation(500, 500)
